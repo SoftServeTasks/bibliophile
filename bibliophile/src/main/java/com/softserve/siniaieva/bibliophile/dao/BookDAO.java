@@ -5,10 +5,12 @@
  */
 package com.softserve.siniaieva.bibliophile.dao;
 
+import com.softserve.siniaieva.bibliophile.entities.MappedBook;
+
 /**
  *
  * @author ksu
  */
-public interface BookDAO {
+public interface BookDAO extends BibliophileDAO<MappedBook>{
     
 }

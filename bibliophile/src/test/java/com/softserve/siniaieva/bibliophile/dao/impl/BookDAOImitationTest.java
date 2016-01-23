@@ -7,6 +7,7 @@ package com.softserve.siniaieva.bibliophile.dao.impl;
 
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
 import com.softserve.siniaieva.bibliophile.dao.factory.BookDAOFactory;
+import com.softserve.siniaieva.bibliophile.entities.MappedBook;
 import com.softserve.siniaieva.bibliophile.models.Book;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class BookDAOImitationTest {
     }
     private BookDAO instance;
     private BookDAOFactory factory;
-    private Book book1;
-    private Book book2;
+    private MappedBook book1;
+    private MappedBook book2;
     
     @BeforeClass
     public static void setUpClass() {
@@ -45,8 +46,8 @@ public class BookDAOImitationTest {
     public void setUp() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         factory = new BookDAOFactory();
         instance = factory.getInstance();
-        book1 = new Book("Красная шапочка", "Шарль Перро", "Сказки");
-        book2 = new Book("Философия Java", "Брюс Эккель", "Программирование");
+        book1 = new MappedBook("Красная шапочка", "Шарль Перро", "Сказки");
+        book2 = new MappedBook("Философия Java", "Брюс Эккель", "Программирование");
     }
     
 
@@ -67,7 +68,7 @@ public class BookDAOImitationTest {
     @Test
     public void verifyUpdateBookCategory() {
         System.out.println("updateBook");
-        Book book = new Book("Философия Java", "Брюс Эккель", "Java");
+        MappedBook book = new MappedBook("Философия Java", "Брюс Эккель", "Java");
         instance.add(book2);
         instance.update(book);
         assertEquals(book, instance.get("Философия Java"));
@@ -76,7 +77,7 @@ public class BookDAOImitationTest {
     @Test
     public void verifyUpdateBookAuthor() {
         System.out.println("updateBook");
-        Book book = new Book("Философия Java", "Bruce Eckel", "Программирование");
+        MappedBook book = new MappedBook("Философия Java", "Bruce Eckel", "Программирование");
         instance.update(book);
         assertEquals(book, instance.get("Философия Java"));
     }

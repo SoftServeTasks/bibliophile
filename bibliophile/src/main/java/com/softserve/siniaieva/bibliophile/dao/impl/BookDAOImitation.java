@@ -7,6 +7,7 @@ package com.softserve.siniaieva.bibliophile.dao.impl;
 
 import com.softserve.siniaieva.bibliophile.dao.BibliophileDAO;
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
+import com.softserve.siniaieva.bibliophile.entities.MappedBook;
 import com.softserve.siniaieva.bibliophile.models.Book;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import java.util.Set;
  */
 public class BookDAOImitation implements BookDAO{
     
-    private Map <String,Book> books=new HashMap<String,Book>();
+    private Map <String,MappedBook> books=new HashMap<String,MappedBook>();
     private static BookDAOImitation instance;
     
     private BookDAOImitation () {}
@@ -33,13 +34,13 @@ public class BookDAOImitation implements BookDAO{
    }
 
     @Override
-    public void add(Book book) {
+    public void add(MappedBook book) {
         books.put(book.getTitle(),book);
     }
 
     @Override
-    public void update(Book book) {
-        Book oldBook = get(book.getTitle());
+    public void update(MappedBook book) {
+        MappedBook oldBook = get(book.getTitle());
         if(oldBook != null) {
             oldBook.setCategory(book.getCategory());
             oldBook.setAuthor(book.getAuthor());
@@ -47,17 +48,17 @@ public class BookDAOImitation implements BookDAO{
     }
 
     @Override
-    public void delete(Book book) {
+    public void delete(MappedBook book) {
         books.remove(book.getTitle(), book);
     }
 
     @Override
-    public Book get(String title) {
+    public MappedBook get(String title) {
         return books.get(title);
     }
 
     @Override
-    public Collection<Book> getAll() {
+    public Collection<MappedBook> getAll() {
         return  books.values();
     }
     
@@ -65,11 +66,11 @@ public class BookDAOImitation implements BookDAO{
     books.clear();
     }
 
-    public Map<String, Book> getBooks() {
+    public Map<String, MappedBook> getBooks() {
         return books;
     }
 
-    public void setBooks(Map<String, Book> books) {
+    public void setBooks(Map<String, MappedBook> books) {
         this.books = books;
     }
     

@@ -5,6 +5,7 @@
  */
 package com.softserve.siniaieva.bibliophile.models;
 
+import com.softserve.siniaieva.bibliophile.entities.MappedBook;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,7 +20,6 @@ public class Book implements Serializable{
     private String title;
     private String author;
     private String category;
-    private Set<Reader> readers = new HashSet<Reader>();
 
     public Book() {
     }
@@ -28,6 +28,12 @@ public class Book implements Serializable{
         this.title = title;
         this.author = author;
         this.category = category;
+    }
+    
+     public Book(MappedBook entity) {
+        this.title = entity.getTitle();
+        this.author = entity.getAuthor();
+        this.category = entity.getCategory();
     }
     
     
@@ -55,13 +61,6 @@ public class Book implements Serializable{
         this.category = category;
     }
 
-    public Set<Reader> getReaders() {
-        return readers;
-    }
-
-    public void setReaders(Set<Reader> readers) {
-        this.readers = readers;
-    }
 
     @Override
     public int hashCode() {
