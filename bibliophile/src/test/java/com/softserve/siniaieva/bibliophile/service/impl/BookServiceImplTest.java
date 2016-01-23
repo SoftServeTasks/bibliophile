@@ -49,7 +49,7 @@ public class BookServiceImplTest {
     }
     
     /**
-     * Test of addBook method, of class BookServiceImpl.
+     * Test of add method, of class BookServiceImpl.
      * @throws java.lang.ClassNotFoundException
      * @throws java.lang.InstantiationException
      * @throws java.lang.IllegalAccessException
@@ -57,43 +57,43 @@ public class BookServiceImplTest {
 
     @Test
     public void verifyAddBook() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        instance.addBook(book1);
+        instance.add(book1);
         verify(dao).add(new MappedBook(book1));
     }
 
     /**
-     * Test of updateBook method, of class BookServiceImpl.
+     * Test of update method, of class BookServiceImpl.
      */
     @Test
     public void verifyUpdateBook() throws ClassNotFoundException, InstantiationException {
-        instance.updateBook(book1);
+        instance.update(book1);
         verify(dao).update(new MappedBook(book1));
     }
 
     /**
-     * Test of deleteBook method, of class BookServiceImpl.
+     * Test of delete method, of class BookServiceImpl.
      */
 
     @Test
     public void verifyDeleteBook() throws ClassNotFoundException {
-        instance.deleteBook(book2);
+        instance.delete(book2);
         verify(dao).delete(new MappedBook(book2));
     }
 
     /**
-     * Test of getBookByTitle method, of class BookServiceImpl.
+     * Test of getByTitle method, of class BookServiceImpl.
      */
 
     @Test
     public void verifyGetBookByTitle() {
         when(dao.get("Красная шапочка")).thenReturn(new MappedBook(book1));
         String title = "Красная шапочка";
-        Book result = instance.getBookByTitle(title);
+        Book result = instance.getByTitle(title);
         assertEquals(book1, result);
     }
 
     /**
-     * Test of getAllBooks method, of class BookServiceImpl.
+     * Test of getAll method, of class BookServiceImpl.
      */
 
     @Test
@@ -107,10 +107,10 @@ public class BookServiceImplTest {
         expResult.add(book1);
         expResult.add(book2);
         
-        instance.addBook(book1);
-        instance.addBook(book2);
+        instance.add(book1);
+        instance.add(book2);
         
-        Collection<Book> result = instance.getAllBooks();
+        Collection<Book> result = instance.getAll();
         
         assertEquals(expResult, result);
     }

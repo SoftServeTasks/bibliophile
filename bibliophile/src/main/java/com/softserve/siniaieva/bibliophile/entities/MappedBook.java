@@ -22,12 +22,17 @@ public class MappedBook implements Serializable {
     private String title;
     private String author;
     private String category;
+    private int rating;
+
+    
     private Set<Reader> readers = new HashSet<Reader>();
 
     public MappedBook() {
+        rating=0;
     }
     
     public MappedBook(String title, String author, String category) {
+        this();
         this.title = title;
         this.author = author;
         this.category = category;
@@ -37,6 +42,7 @@ public class MappedBook implements Serializable {
         this.title = model.getTitle();
         this.author = model.getAuthor();
         this.category = model.getCategory();
+        this.rating = model.getRating();
     }
 
     public long getId() {
@@ -69,6 +75,17 @@ public class MappedBook implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+    
+    public int getRating() {
+        return rating;
+    }
+
+    /**
+     * rating is increasing when Readers add this book in their libraries
+     */
+    public void increaseRating() {
+        rating++;
     }
 
     public Set<Reader> getReaders() {
@@ -114,7 +131,7 @@ public class MappedBook implements Serializable {
 
     @Override
     public String toString() {
-        return "Book{" + "title=" + title + ", author=" + author + ", category=" + category + '}';
+        return String.format("Book{ title = %s, author= %s, category=%s ", title, author, category);
     }
     
 }

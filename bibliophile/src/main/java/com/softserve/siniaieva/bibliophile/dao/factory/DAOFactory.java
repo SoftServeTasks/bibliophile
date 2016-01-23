@@ -18,25 +18,27 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author ksu
+ * @param <T>
  */
-public class BookDAOFactory {
+public class DAOFactory <T>{
     
     private String daoType;
     private String propertyFilePath;
     private Properties property;
     private FileInputStream fis;
     private static Logger LOGGER;
+    private String propertyKey;
 
-    public BookDAOFactory(String propertyFilePath) {
-        this();
+    public DAOFactory(String propertyFilePath,String propertyKey) {
+        this(propertyKey);
         this.propertyFilePath = propertyFilePath;
-        
     }
  
 
-    public BookDAOFactory() {
+    public DAOFactory(String propertyKey) {
         propertyFilePath = "src/main/resources/dao_factory.properties";
-        LOGGER = LoggerFactory.getLogger(BookDAOFactory.class);
+        LOGGER = LoggerFactory.getLogger(DAOFactory.class);
+        this.propertyKey = propertyKey;
         try {
             property = new Properties();
             fis = new FileInputStream(propertyFilePath);
@@ -46,15 +48,15 @@ public class BookDAOFactory {
         } catch (IOException ex) {
             LOGGER.error("Unable to download Property file: " + propertyFilePath, ex);
         }
-        daoType = property.getProperty("dao");
+        daoType = property.getProperty(propertyKey);
     }
     
     
     
-    public BookDAO getInstance () throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+    public T getInstance () throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         Class c = Class.forName(daoType); 
         Method method = c.getDeclaredMethod("getInstance");
-        return (BookDAO) method.invoke(null, null);
+        return (T) method.invoke(null, null);
     }
     
 }

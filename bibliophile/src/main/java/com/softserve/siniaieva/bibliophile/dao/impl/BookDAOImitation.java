@@ -5,14 +5,11 @@
  */
 package com.softserve.siniaieva.bibliophile.dao.impl;
 
-import com.softserve.siniaieva.bibliophile.dao.BibliophileDAO;
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
 import com.softserve.siniaieva.bibliophile.entities.MappedBook;
-import com.softserve.siniaieva.bibliophile.models.Book;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *

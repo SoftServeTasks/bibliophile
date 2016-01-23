@@ -7,9 +7,7 @@ package com.softserve.siniaieva.bibliophile.models;
 
 import com.softserve.siniaieva.bibliophile.entities.MappedBook;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  *
@@ -20,6 +18,7 @@ public class Book implements Serializable{
     private String title;
     private String author;
     private String category;
+    private int rating;
 
     public Book() {
     }
@@ -61,6 +60,16 @@ public class Book implements Serializable{
         this.category = category;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    /**
+     * rating is increasing when Readers add this book in their libraries
+     */
+    public void increaseRating() {
+        rating++;
+    }
 
     @Override
     public int hashCode() {
@@ -97,7 +106,7 @@ public class Book implements Serializable{
 
     @Override
     public String toString() {
-        return "Book{" + "title=" + title + ", author=" + author + ", category=" + category + '}';
+        return String.format("Book{ title = %s, author= %s, category=%s ", title, author, category);
     }
     
     

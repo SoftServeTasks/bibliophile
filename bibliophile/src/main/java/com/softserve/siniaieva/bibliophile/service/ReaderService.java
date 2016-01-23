@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.softserve.siniaieva.bibliophile.dao;
+package com.softserve.siniaieva.bibliophile.service;
 
-import com.softserve.siniaieva.bibliophile.entities.MappedReader;
 import com.softserve.siniaieva.bibliophile.models.Reader;
 
 /**
  *
  * @author ksu
  */
-public interface ReaderDAO extends BibliophileDAO<MappedReader> {
-    
-    
+public interface ReaderService extends GenericServce<Reader> {
+    public void ban(Reader reader);
 }

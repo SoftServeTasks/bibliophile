@@ -15,25 +15,25 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author stoxa
+ * @author ksu
  */
-public class BookDAOFactoryTest {
+public class DAOFactoryTest {
     
     
-    private BookDAOFactory instance;
+    private DAOFactory <BookDAO> instance;
     
-    public BookDAOFactoryTest() {
+    public DAOFactoryTest() {
     }
     
     
     @Before
     public void setUp() {   
-    instance = new BookDAOFactory("src/test/resources/test_dao_factory.properties");
+    instance = new DAOFactory("src/test/resources/test_dao_factory.properties","BookDAO");
     }
     
 
     /**
-     * Test of getInstance method, of class BookDAOFactory.
+     * Test of getInstance method, of class DAOFactory.
      */
     
     @Test
@@ -43,17 +43,17 @@ public class BookDAOFactoryTest {
             BookDAO secondResultInstance = instance.getInstance();
             assertEquals(firstResultInstance, secondResultInstance);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchMethodException ex) {
-            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {
-            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
-            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

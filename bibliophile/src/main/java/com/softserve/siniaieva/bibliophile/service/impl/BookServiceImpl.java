@@ -6,52 +6,53 @@
 package com.softserve.siniaieva.bibliophile.service.impl;
 
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
-import com.softserve.siniaieva.bibliophile.dao.factory.BookDAOFactory;
+import com.softserve.siniaieva.bibliophile.dao.factory.DAOFactory;
 import com.softserve.siniaieva.bibliophile.entities.MappedBook;
 import com.softserve.siniaieva.bibliophile.models.Book;
-import com.softserve.siniaieva.bibliophile.service.BookServise;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
+import com.softserve.siniaieva.bibliophile.service.BookService;
+import java.util.Comparator;
 
 /**
  *
  * @author ksu
  */
-public class BookServiceImpl implements BookServise {
+public class BookServiceImpl implements BookService {
     
     private BookDAO dao;
-    private BookDAOFactory daoFactory;
+    private DAOFactory<BookDAO> daoFactory;
 
     public BookServiceImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-        daoFactory = new BookDAOFactory();
+        daoFactory = new DAOFactory("BookDAO");
         dao = daoFactory.getInstance();
     }
     
     
 
     @Override
-    public void addBook(Book book) {
+    public void add(Book book) {
        dao.add(new MappedBook(book));
     }
 
     @Override
-    public void updateBook(Book book) {
+    public void update(Book book) {
         dao.update(new MappedBook(book));
     }
 
     @Override
-    public void deleteBook(Book book) {
+    public void delete(Book book) {
         dao.delete(new MappedBook(book));
     }
 
     @Override
-    public Book getBookByTitle(String title) {
+    public Book getByTitle(String title) {
         return new Book(dao.get(title));
     }
 
     @Override
-    public Collection<Book> getAllBooks() {
+    public Collection<Book> getAll() {
         Collection<MappedBook> entities = dao.getAll();
         Collection<Book> models = new ArrayList<Book>(entities.size());
         Book book = null;
@@ -70,14 +71,19 @@ public class BookServiceImpl implements BookServise {
         this.dao = dao;
     }
 
-    public BookDAOFactory getDaoFactory() {
+    public DAOFactory getDaoFactory() {
         return daoFactory;
     }
 
-    public void setDaoFactory(BookDAOFactory daoFactory) {
+    public void setDaoFactory(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
-    
-    
-    
+
+    @Override
+    public Collection<Book> getSortedList(Comparator compareParameter) {
+        ArrayList <Book> sortedBooks = (ArrayList <Book>) this.getAll();
+        sortedBooks.sort(compareParameter);
+        return sortedBooks;
+    }
+ 
 }

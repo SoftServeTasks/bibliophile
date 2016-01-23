@@ -7,14 +7,12 @@ package com.softserve.siniaieva.bibliophile.service;
 
 import com.softserve.siniaieva.bibliophile.models.Book;
 import java.util.Collection;
+import java.util.Comparator;
 /**
  *
- * @author stoxa
+ * @author ksu
  */
-public interface BookServise {
-    public void addBook(Book book);
-    public void updateBook(Book book);
-    public void deleteBook(Book book);
-    public Book getBookByTitle (String title);
-    public Collection<Book> getAllBooks();
+public interface BookService extends GenericServce <Book> {
+    public Book getByTitle (String title);
+    public Collection <Book> getSortedList (Comparator compareParameter);
 }

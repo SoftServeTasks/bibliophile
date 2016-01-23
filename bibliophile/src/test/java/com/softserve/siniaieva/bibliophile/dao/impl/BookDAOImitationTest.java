@@ -6,9 +6,8 @@
 package com.softserve.siniaieva.bibliophile.dao.impl;
 
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
-import com.softserve.siniaieva.bibliophile.dao.factory.BookDAOFactory;
+import com.softserve.siniaieva.bibliophile.dao.factory.DAOFactory;
 import com.softserve.siniaieva.bibliophile.entities.MappedBook;
-import com.softserve.siniaieva.bibliophile.models.Book;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +27,7 @@ public class BookDAOImitationTest {
     public BookDAOImitationTest() {
     }
     private BookDAO instance;
-    private BookDAOFactory factory;
+    private DAOFactory <BookDAO> factory;
     private MappedBook book1;
     private MappedBook book2;
     
@@ -44,7 +43,7 @@ public class BookDAOImitationTest {
     
     @Before
     public void setUp() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-        factory = new BookDAOFactory();
+        factory = new DAOFactory<>("BookDAO");
         instance = factory.getInstance();
         book1 = new MappedBook("Красная шапочка", "Шарль Перро", "Сказки");
         book2 = new MappedBook("Философия Java", "Брюс Эккель", "Программирование");
