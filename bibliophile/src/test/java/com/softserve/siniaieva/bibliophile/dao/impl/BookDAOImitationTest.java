@@ -8,12 +8,15 @@ package com.softserve.siniaieva.bibliophile.dao.impl;
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
 import com.softserve.siniaieva.bibliophile.dao.factory.BookDAOFactory;
 import com.softserve.siniaieva.bibliophile.models.Book;
-import org.junit.After;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
 
 /**
  *
@@ -39,7 +42,7 @@ public class BookDAOImitationTest {
     }
     
     @Before
-    public void setUp() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void setUp() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         factory = new BookDAOFactory();
         instance = factory.getInstance();
         book1 = new Book("Красная шапочка", "Шарль Перро", "Сказки");
@@ -49,38 +52,48 @@ public class BookDAOImitationTest {
 
 
     /**
-     * Test of createtBook method, of class BookDAOImitation.
+     * Test of add method, of class BookDAOImitation.
      */
     @Test
-    public void testCreatetBook() {
-        System.out.println("createtBook");
-        instance.createtBook(book2);
-        assertEquals(1, instance.getAllBooks().size());
+    public void verifyAddBook() {
+        instance.add(book1);
+        instance.add(book2);
+        assertEquals(2, instance.getAll().size());
     }
 
     /**
-     * Test of updateBook method, of class BookDAOImitation.
+     * Test of update method, of class BookDAOImitation.
      */
     @Test
-    public void testUpdateBook() {
+    public void verifyUpdateBookCategory() {
         System.out.println("updateBook");
-        Book book = null;
-        BookDAOImitation instance = null;
-        instance.updateBook(book);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Book book = new Book("Философия Java", "Брюс Эккель", "Java");
+        instance.add(book2);
+        instance.update(book);
+        assertEquals(book, instance.get("Философия Java"));
+    }
+    
+    @Test
+    public void verifyUpdateBookAuthor() {
+        System.out.println("updateBook");
+        Book book = new Book("Философия Java", "Bruce Eckel", "Программирование");
+        instance.update(book);
+        assertEquals(book, instance.get("Философия Java"));
     }
 
     /**
      * Test of clearAll method, of class BookDAOImitation.
      */
     @Test
-    public void testClearAll() {
+    public void verifyGetAllBooksList() {
         System.out.println("clearAll");
-        BookDAOImitation instance = null;
-        instance.clearAll();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Collection expResult = new ArrayList();
+        expResult.add(book1);
+        expResult.add(book2);
+        instance.add(book1);
+        instance.add(book2);
+        Collection result = instance.getAll();
+        assertEquals(expResult.size(), result.size());
     }
     
 }

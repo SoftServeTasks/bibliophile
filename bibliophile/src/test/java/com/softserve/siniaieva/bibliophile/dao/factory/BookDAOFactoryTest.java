@@ -6,10 +6,10 @@
 package com.softserve.siniaieva.bibliophile.dao.factory;
 
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
-import org.junit.After;
-import org.junit.AfterClass;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,37 +19,43 @@ import static org.junit.Assert.*;
  */
 public class BookDAOFactoryTest {
     
+    
+    private BookDAOFactory instance;
+    
     public BookDAOFactoryTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
-    public void setUp() {
+    public void setUp() {   
+    instance = new BookDAOFactory("src/test/resources/test_dao_factory.properties");
     }
     
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getInstance method, of class BookDAOFactory.
      */
+    
     @Test
-    public void testGetInstance() throws Exception {
-        System.out.println("getInstance");
-        BookDAOFactory instance = new BookDAOFactory();
-        BookDAO expResult = null;
-        BookDAO result = instance.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void verifyGetInstanceReturnsSingleton() {
+        try {
+            BookDAO firstResultInstance = instance.getInstance();
+            BookDAO secondResultInstance = instance.getInstance();
+            assertEquals(firstResultInstance, secondResultInstance);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(BookDAOFactoryTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
 }

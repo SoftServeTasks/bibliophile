@@ -9,6 +9,6 @@ package com.softserve.siniaieva.bibliophile.dao;
  *
  * @author ksu
  */
-public interface BookDAO {
+class Parametr {
     
 }

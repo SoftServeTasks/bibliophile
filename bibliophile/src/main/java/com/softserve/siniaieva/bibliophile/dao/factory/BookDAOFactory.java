@@ -10,6 +10,8 @@ import com.softserve.siniaieva.bibliophile.dao.BookDAO;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,9 +27,16 @@ public class BookDAOFactory {
     private FileInputStream fis;
     private static Logger LOGGER;
 
+    public BookDAOFactory(String propertyFilePath) {
+        this();
+        this.propertyFilePath = propertyFilePath;
+        
+    }
+ 
+
     public BookDAOFactory() {
-        LOGGER = LoggerFactory.getLogger(BookDAOFactory.class);
         propertyFilePath = "src/main/resources/dao_factory.properties";
+        LOGGER = LoggerFactory.getLogger(BookDAOFactory.class);
         try {
             property = new Properties();
             fis = new FileInputStream(propertyFilePath);
@@ -42,9 +51,10 @@ public class BookDAOFactory {
     
     
     
-    public BookDAO getInstance () throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public BookDAO getInstance () throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         Class c = Class.forName(daoType); 
-        return (BookDAO) c.newInstance();   
+        Method method = c.getDeclaredMethod("getInstance");
+        return (BookDAO) method.invoke(null, null);
     }
     
 }

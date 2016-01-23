@@ -5,7 +5,10 @@
  */
 package com.softserve.siniaieva.bibliophile.service.impl;
 
+import com.softserve.siniaieva.bibliophile.dao.BookDAO;
 import com.softserve.siniaieva.bibliophile.models.Book;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,6 +17,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 /**
  *
@@ -27,89 +33,78 @@ public class BookServiceImplTest {
     private BookServiceImpl instance;
     private Book book1;
     private Book book2;
+    private static BookDAO dao;
     
     
     @BeforeClass
     public static void setUpClass() {
-        System.out.println ("Start BookServiceImpl testing");
+        dao = mock(BookDAO.class);
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-        System.out.println ("Finish BookServiceImpl testing");
-    }
     
     @Before
-    public void setUp() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void setUp() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         instance = new BookServiceImpl();
+        instance.setDao(dao);
+        book1 = new Book("Красная шапочка", "Шарль Перро", "Сказки");
+        book2 = new Book("Философия Java", "Брюс Эккель", "Программирование");
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of addBook method, of class BookServiceImpl.
      */
-    @Ignore
+
     @Test
-    public void testAddBook() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        System.out.println("addBook");
-        Book book = null;
-        
-        instance.addBook(book);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void verifyAddBook() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        instance.addBook(book1);
+        verify(dao).add(book1);
     }
 
     /**
      * Test of updateBook method, of class BookServiceImpl.
      */
-    @Ignore
     @Test
-    public void testUpdateBook() throws ClassNotFoundException, InstantiationException {
-        System.out.println("updateBook");
+    public void verifyUpdateBook() throws ClassNotFoundException, InstantiationException {
         instance.updateBook(book1);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        verify(dao).update(book1);
     }
 
     /**
      * Test of deleteBook method, of class BookServiceImpl.
      */
-    @Ignore
+
     @Test
-    public void testDeleteBook() throws ClassNotFoundException {
+    public void verifyDeleteBook() throws ClassNotFoundException {
         instance.deleteBook(book2);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        verify(dao).delete(book2);
     }
 
     /**
      * Test of getBookByTitle method, of class BookServiceImpl.
      */
-    @Ignore
+
     @Test
-    public void testGetBookByTitle() {
-        System.out.println("getBookByTitle");
-        String title = "";
-        instance.getBookByTitle(title);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void verifyGetBookByTitle() {
+        when(dao.get("Красная шапочка")).thenReturn(book1);
+        String title = "Красная шапочка";
+        Book result = instance.getBookByTitle(title);
+        assertEquals(book1, result);
     }
 
     /**
      * Test of getAllBooks method, of class BookServiceImpl.
      */
-    @Ignore
+
     @Test
     public void testGetAllBooks() throws ClassNotFoundException {
-        System.out.println("getAllBooks");
-        Collection<Book> expResult = null;
+        Collection<Book> expResult = new ArrayList();
+        expResult.add(book1);
+        expResult.add(book2);
+        instance.addBook(book1);
+        instance.addBook(book2);
+        when(dao.getAll()).thenReturn(expResult);
         Collection<Book> result = instance.getAllBooks();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

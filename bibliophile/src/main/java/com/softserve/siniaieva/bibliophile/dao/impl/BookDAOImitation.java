@@ -5,6 +5,7 @@
  */
 package com.softserve.siniaieva.bibliophile.dao.impl;
 
+import com.softserve.siniaieva.bibliophile.dao.BibliophileDAO;
 import com.softserve.siniaieva.bibliophile.dao.BookDAO;
 import com.softserve.siniaieva.bibliophile.models.Book;
 import java.util.Collection;
@@ -32,31 +33,31 @@ public class BookDAOImitation implements BookDAO{
    }
 
     @Override
-    public void createtBook(Book book) {
+    public void add(Book book) {
         books.put(book.getTitle(),book);
     }
 
     @Override
-    public void updateBook(Book book) {
-        Book oldBook = getBook(book.getTitle());
+    public void update(Book book) {
+        Book oldBook = get(book.getTitle());
         if(oldBook != null) {
-            oldBook.setCategory(oldBook.getCategory());
-            oldBook.setAuthor(oldBook.getAuthor());
+            oldBook.setCategory(book.getCategory());
+            oldBook.setAuthor(book.getAuthor());
     }
     }
 
     @Override
-    public void deleteBook(Book book) {
+    public void delete(Book book) {
         books.remove(book.getTitle(), book);
     }
 
     @Override
-    public Book getBook(String title) {
+    public Book get(String title) {
         return books.get(title);
     }
 
     @Override
-    public Collection<Book> getAllBooks() {
+    public Collection<Book> getAll() {
         return  books.values();
     }
     
