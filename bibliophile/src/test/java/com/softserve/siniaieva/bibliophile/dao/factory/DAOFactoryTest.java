@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -28,14 +29,14 @@ public class DAOFactoryTest {
     
     @Before
     public void setUp() {   
-    instance = new DAOFactory("src/test/resources/test_dao_factory.properties","BookDAO");
+    instance = new DAOFactory("BookDAO");
     }
     
 
     /**
      * Test of getInstance method, of class DAOFactory.
      */
-    
+
     @Test
     public void verifyGetInstanceReturnsSingleton() {
         try {

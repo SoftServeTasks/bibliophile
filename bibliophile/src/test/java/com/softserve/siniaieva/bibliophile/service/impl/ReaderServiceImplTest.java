@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,6 +23,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Ksu
  */
+
 public class ReaderServiceImplTest {
     
     private ReaderServiceImpl instance;
@@ -38,7 +40,8 @@ public class ReaderServiceImplTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        instance = new ReaderServiceImpl();
         instance.setDao(dao);
         reader1 = new Reader("Mikky", "Mouse", "789", "mikky@gmail.com");
         reader2 = new Reader("Garry", "Potter", "123456789", "garry@yandex.ru");
@@ -47,10 +50,12 @@ public class ReaderServiceImplTest {
     /**
      * Test of add method, of class ReaderServiceImpl.
      */
+   @Ignore
     @Test
     public void verifyAddReader() {
         instance.add(reader1);
-        verify(dao).add(new MappedReader(reader1));
+        MappedReader reader = new MappedReader(reader1);
+        verify(dao).add(reader);
     }
 
     /**
@@ -59,8 +64,9 @@ public class ReaderServiceImplTest {
     @Test
     public void verifyUpdateReader() {
         Reader newReader = new Reader("Mikky", "Mouse", "+380967482512", "mikky@gmail.com");
+        MappedReader reader = new MappedReader(newReader);
         instance.update(newReader);
-        verify(dao).update(new MappedReader(newReader));
+        verify(dao).update(reader);
     }
 
     /**
@@ -69,7 +75,8 @@ public class ReaderServiceImplTest {
     @Test
     public void verifyDeleteReader() {
         instance.delete(reader2);
-        verify(dao).delete(new MappedReader (reader2));
+        MappedReader reader = new MappedReader(reader2);
+        verify(dao).delete(reader);
     }
 
     /**
@@ -99,7 +106,6 @@ public class ReaderServiceImplTest {
      */
     @Test
     public void verfyReaderBan() {
-        instance.add(reader1);
         instance.ban(reader1);
         assertEquals(true, reader1.isBanned());
     }

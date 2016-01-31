@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app metadata-complete="true" version="3.1"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+
+    <display-name>Student Information System</display-name>
+    <welcomefiles>
+        <welcomefile>index.html</welcomefile>
+    </welcomefiles>
+
+    <servlet>
+        <servlet-name>ContactsController</servlet-name>
+        <servlet-class>com.softserve.siniaieva.bibliophile.controllers.ContactsRestController</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>AddBookController</servlet-name>
+        <servlet-class>com.softserve.siniaieva.bibliophile.controllers.AddBookController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ContactsController</servlet-name>
+        <url-pattern>/books</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MainView</servlet-name>
+        <jsp-file>/WEB-INF/pages/main.jsp</jsp-file>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>AddView</servlet-name>
+        <jsp-file>/WEB-INF/pages/addbook.jsp</jsp-file>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>AddView</servlet-name>
+        <url-pattern>/new</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>AddBookController</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+</web-app>

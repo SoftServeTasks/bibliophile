@@ -4,7 +4,31 @@
     <groupId>com.pb.ekb</groupId>
     <artifactId>bibliophile</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.7</jdk.version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <org.springframework.version>4.1.5.RELEASE</org.springframework.version>
+    </properties>
+    <profiles>
+        <profile>
+            <id>map</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <dao.type>MAP</dao.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>xml</id>
+            <properties>
+                <dao.type>XML</dao.type>
+            </properties>
+        </profile>
+    </profiles>
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -37,10 +61,31 @@
             <version>1.0.1.Final</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+    <build>
+        <finalName>${artifactId}</finalName>  
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${jdk.version}</source>  
+                    <target>${jdk.version}</target>  
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

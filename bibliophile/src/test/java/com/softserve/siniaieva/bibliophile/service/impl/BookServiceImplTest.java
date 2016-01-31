@@ -15,14 +15,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  *
- * @author stoxa
+ * @author ksu
  */
+
 public class BookServiceImplTest {
     
     public BookServiceImplTest() {

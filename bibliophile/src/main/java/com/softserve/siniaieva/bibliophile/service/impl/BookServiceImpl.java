@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import com.softserve.siniaieva.bibliophile.service.BookService;
 import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,9 +26,13 @@ public class BookServiceImpl implements BookService {
     private BookDAO dao;
     private DAOFactory<BookDAO> daoFactory;
 
-    public BookServiceImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-        daoFactory = new DAOFactory("BookDAO");
-        dao = daoFactory.getInstance();
+    public BookServiceImpl() {
+        daoFactory = new DAOFactory("src/main/resources/dao_factory.properties","BookDAO");
+        try {
+            dao = daoFactory.getInstance();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
     }
     
     
