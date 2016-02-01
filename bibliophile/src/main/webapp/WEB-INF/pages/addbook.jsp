@@ -1,56 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
 
-<html>
 
-    <head>
+<HTML>
+
+    <HEAD>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Add new book Form</title>
+        <TITLE>Add new book Form</TITLE>
 
         <style>
 
             .error {
                 color: #ff0000;
+                
             }
         </style>
 
-    </head>
+    </HEAD>
 
     <body>
 
-        <h2>Registration Form</h2>
-
-    <form:form method="POST" modelAttribute="book" action="AddView">
-        <form:input type="hidden" path="id" id="id"/>
-        <table>
-            <tr>
-                <td><label for="title">TITLE: </label> </td>
-                <td><input path="title" name="title" id="title"/></td>
-            <td><form:errors path="title" cssClass="error"/></td>
-            </tr>
-
-            <tr>
-                <td><label for="author">AUTHOR: </label> </td>
-                <td><input path="author" name="author" id="author"/></td>
-            <td><form:errors path="author" cssClass="error"/></td>
-            </tr>
-
-            <tr>
-                <td><label for="category">CATEGORY: </label> </td>
-                <td><input path="category" name="category" id="category"/></td>
-            <td><form:errors path="category" cssClass="error"/></td>
-            </tr>
 
 
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Submit"/>
-                </td>
-            </tr>
-        </table>  
-    </form:form>
-    <br/>
-    <br/>
-    Go back to <a href="/bibliophile/books">List of All Books</a>
-</body>
-</html>
+        <H1> Add new Book</H1>
+        <FORM ACTION="/bibliophile/add" METHOD=POST>
+            <H2>Fill out the form</H2>
+            <table align="left" wight ="100%" cellspasing="0" sellpadding ="3">
+                <tr>
+                    <td align="left"> Title:</td> 
+                <td><INPUT TYPE=text SIZE=40 NAME=title ></td>
+                </tr>
+                <tr>
+                    <td align="left">Author: </td>
+                    <td><INPUT TYPE=text SIZE=40 NAME=author ></td>
+                </tr>
+                <tr>
+                    <td align="left">Category:</td>
+                    <td><INPUT TYPE=text SIZE=40 NAME=category ></td>
+                <tr>
+                    <td><INPUT TYPE=submit VALUE="Save new book"></td>
+                </tr>
+            </table>
+        </FORM>
+    
+</BODY>
+</HTML>
+
+
